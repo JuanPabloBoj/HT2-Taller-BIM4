@@ -1,59 +1,40 @@
 # HT2Taller
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.3.
+app.routes: Se encarga de mapear las rutas del proyecto.
 
-## Development server
+Primer path encargado de la raiz o ruta por defecto.
 
-To start a local development server, run:
+Segundo path encargado de la vista principal siendo inicio.
 
-```bash
-ng serve
-```
+Tercer path encargado de la vista del registro de un nuevo medicamento.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Cuarto path encagrado de error de escritura en URL's dando por defecto la vista de inicio para evitar pantallas en blanco o errores.
 
-## Code scaffolding
+Services:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+medicamentos.service: Se encarga de mantener la base de memoria de los datos y gestiona el flujo de informacion entre los componentes.
 
-```bash
-ng generate component component-name
-```
+@Injectable: Se encarga de generar una sola instancia manteniendo la memoria de los registros ingresados.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+listarMedicamentos: es el array encargado de almacenar los registros.
 
-```bash
-ng generate --help
-```
+obtenerMedicamentos: es el encargado de la consulta/leectura de los datos que estan almacenados en el array.
 
-## Building
+guardarMedicamento: es el encargado de de la escritura/registro de un nuevo medicamento.
 
-To build the project run:
+obtenerMedicamentos: 
 
-```bash
-ng build
-```
+Components:
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+agregar-medicamentos: Se realizan los registro de nuevos medicamentos. Utilizando metodos como: 
 
-## Running unit tests
+ngOnInit: que se inicializa con medicamentosForm para realizar la estructura del formulario verificando que todas las especificaciones para ciertos campos sean cumplidas. 
+noValido: para mostrar mensajes de problemas que ocurrienron al intentar almacenar el registro. 
+onSubmit: que se ejecuta cuando se realiza el clik sobre el boton de guardar el registro con los campos llenos anteriormente dando un mensaje de guardado con exito o si humo un problema al guardar.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+inicio: Se utiliza para la visualizacion de la tabla que almacena los registros de medicamentos. 
+Utiliza un array de Medicamentos para almacenar los valores ingresados.
 
-```bash
-ng test
-```
+ngOnInit: se encarga de realizar el llamado a cargarMedicamentos() siendo este el que realiza el ordenamiento de los registros sin que el usuario tenga la necesidad de tocar algun boton. 
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+cargarMedicamentos: se encarga de la peticion de los datos que se mostraran el la tabla. Si no detecta registros realizados y sin errores mostrara un mensaje de valores vacios. Si ocurrio algun error realizara el mensaje sobre esto.
