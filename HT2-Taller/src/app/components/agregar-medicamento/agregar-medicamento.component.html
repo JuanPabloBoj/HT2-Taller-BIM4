@@ -1,0 +1,81 @@
+<div class="caja-formulario">
+  <h2>{{ titulo }}</h2>
+
+  <p *ngIf="mensaje" class="mensaje">{{ mensaje }}</p>
+
+  <form [formGroup]="medicamentosForm" (ngSubmit)="onSubmit()">
+    
+    <div class="campo">
+      <label for="codigoMedicamento">Código del Medicamento:</label>
+      <input id="codigoMedicamento" type="number" formControlName="codigoMedicamento" placeholder="Ej. 101">
+      <div *ngIf="noValido('codigoMedicamento')" class="texto-error">
+        <small *ngIf="medicamentosForm.get('codigoMedicamento')?.errors?.['required']">El código es obligatorio.</small>
+        <small *ngIf="medicamentosForm.get('codigoMedicamento')?.errors?.['min']">El código debe ser mayor a 0.</small>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" type="text" formControlName="nombre" placeholder="Ej. Paracetamol 500mg">
+      <div *ngIf="noValido('nombre')" class="texto-error">
+        <small *ngIf="medicamentosForm.get('nombre')?.errors?.['required']">El nombre es obligatorio.</small>
+        <small *ngIf="medicamentosForm.get('nombre')?.errors?.['minlength']">Debe tener al menos 3 caracteres.</small>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="categoria">Categoría:</label>
+      <select id="categoria" formControlName="categoria">
+        <option value="">-- Seleccione una categoría --</option>
+        <option *ngFor="let cat of categoria" [value]="cat">{{ cat }}</option>
+      </select>
+      <div *ngIf="noValido('categoria')" class="texto-error">
+        <small *ngIf="medicamentosForm.get('categoria')?.errors?.['required']">Debe seleccionar una categoría.</small>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="precio">Precio:</label>
+      <input id="precio" type="number" step="0.01" formControlName="precio" placeholder="0.00">
+      <div *ngIf="noValido('precio')" class="texto-error">
+        <small *ngIf="medicamentosForm.get('precio')?.errors?.['required']">El precio es obligatorio.</small>
+        <small *ngIf="medicamentosForm.get('precio')?.errors?.['min']">El precio debe ser al menos 0.01.</small>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="stock">Stock:</label>
+      <input id="stock" type="number" formControlName="stock" placeholder="0">
+      <div *ngIf="noValido('stock')" class="texto-error">
+        <small *ngIf="medicamentosForm.get('stock')?.errors?.['required']">El stock es obligatorio.</small>
+        <small *ngIf="medicamentosForm.get('stock')?.errors?.['min']">El stock no puede ser negativo.</small>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="fechaVencimiento">Fecha de Vencimiento:</label>
+      <input id="fechaVencimiento" type="date" formControlName="fechaVencimiento">
+      <div *ngIf="noValido('fechaVencimiento')" class="texto-error">
+        <small *ngIf="medicamentosForm.get('fechaVencimiento')?.errors?.['required']">La fecha de vencimiento es obligatoria.</small>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" formControlName="descripcion" rows="3" placeholder="Descripción detallada..."></textarea>
+      <div *ngIf="noValido('descripcion')" class="texto-error">
+        <small *ngIf="medicamentosForm.get('descripcion')?.errors?.['required']">La descripción es obligatoria.</small>
+        <small *ngIf="medicamentosForm.get('descripcion')?.errors?.['minlength']">Debe incluir al menos 10 caracteres.</small>
+      </div>
+    </div>
+
+    <div class="campo casilla">
+      <label>
+        <input type="checkbox" formControlName="requiereReceta"> Requiere Receta Médica
+      </label>
+    </div>
+
+    <button type="submit" [disabled]="medicamentosForm.invalid">Registrar Medicamento</button>
+
+  </form>
+</div>

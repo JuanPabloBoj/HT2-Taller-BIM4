@@ -1,0 +1,36 @@
+<h2>Lista de productos</h2>
+
+<table class="tabla-productos">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Nombre</th>
+      <th>Categoría</th>
+      <th>Precio</th>
+      <th>Stock</th>
+      <th>Descripción</th>
+      <th>Fecha Vencimiento</th>
+      <th>Requiere Receta</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr *ngFor="let medicamento of listaMedicamentos">
+      <td>{{ medicamento.codigoMedicamento }}</td>
+      <td>{{ medicamento.nombre }}</td>
+      <td>{{ medicamento.categoria }}</td>
+      <td>Q{{ medicamento.precio }}</td>
+      <td>{{ medicamento.stock }}</td>
+      <td>{{ medicamento.descripcion }}</td>
+      <td>{{ medicamento.fechaVencimiento}}</td>
+      <td>{{ medicamento.requiereReceta ? 'Sí' : 'No' }}</td>
+    </tr>
+
+    <tr *ngIf="listaMedicamentos.length === 0">
+      <td colspan="8" class="texto-vacio">
+        No hay medicamentos ni productos registrados en este momento.
+      </td>
+    </tr>
+
+  </tbody>
+</table>
